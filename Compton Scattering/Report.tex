@@ -1,0 +1,316 @@
+\documentclass[aps,prl,twocolumn,superscriptaddress,nofootinbib]{revtex4-2}
+
+\usepackage{amsmath,amssymb,graphicx,bm,siunitx}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{float}
+
+\begin{document}
+
+\title{\textbf{Experimental Verification of Compton Scattering and Klein--Nishina Angular Distribution Using $^{137}$Cs Gamma Rays}}
+
+\author{Roshan Yadav \\ Roll No: 2311144}
+\affiliation{Nuclear Physics and Instrumentation Laboratory, School of Physical Sciences,\\
+National Institute of Science Education and Research (NISER), Bhubaneswar, India \\ Date of Experiment: 11/02/2026 , 12/02/2026 \\
+Date of Submission: 18/02/2026}
+
+
+\begin{abstract}
+Compton scattering of 662~keV $\gamma$-rays from a $^{137}$Cs source was investigated using Aluminium and Brass targets. Scattered photon energies were measured at $\theta = 30^\circ, 45^\circ, 60^\circ, 90^\circ,$ and $120^\circ$ using a NaI(Tl) scintillation detector coupled to a multichannel analyzer. The measured energies were compared with the relativistic Compton relation. Brass results agree with theory within 3\% ($r=0.9998$), while Aluminium agrees for $\theta \ge 60^\circ$ but shows deviation at small angles due to primary beam contamination. The angular intensity distribution was compared with the Klein–Nishina formula. Although the qualitative angular trend was reproduced, quantitative fitting yielded low $R^2$ and large $\chi^2$, indicating systematic experimental limitations. The experiment confirms relativistic photon–electron scattering and illustrates practical constraints in measuring differential cross sections.
+\end{abstract}
+
+\maketitle
+
+\section*{Introduction}
+
+Compton scattering is a fundamental demonstration of the particle nature of electromagnetic radiation. In 1923, Compton observed that X-rays scattered from electrons in a carbon target exhibited a wavelength shift dependent on the scattering angle~\cite{compton1923}. This observation could not be explained by classical wave theory and provided direct evidence that photons carry momentum.
+
+The wavelength shift is given by
+
+\begin{equation}
+\Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c}(1-\cos\theta),
+\end{equation}
+
+where $\lambda$ and $\lambda'$ are the incident and scattered wavelengths, $h$ is Planck’s constant, $m_e$ is the electron rest mass, $c$ is the speed of light, and $\theta$ is the photon scattering angle. The quantity
+
+\begin{equation}
+\lambda_C = \frac{h}{m_e c} = 0.02426~\text{\AA}
+\end{equation}
+
+is known as the Compton wavelength of the electron.
+
+In the present experiment, electrons scatter monoenergetic 662~keV $\gamma$-rays from a $^{137}$C source in Aluminum and Brass targets. The scattered photon energies are measured using a calibrated NaI(Tl) scintillation detector. By analyzing the angular dependence of the energy shift and scattering intensity, we verify the relativistic Compton relation and compare the results with the Klein--Nishina prediction for the differential cross section.
+
+\section*{Theory}
+
+\subsection*{Relativistic Energy--Momentum Conservation}
+
+Compton scattering is treated as a relativistic two-body collision between a photon and an initially stationary electron. Conservation of total energy gives
+
+\begin{equation}
+E_0 + m_e c^2 = E_\theta + \sqrt{(p_e c)^2 + (m_e c^2)^2},
+\end{equation}
+
+while momentum conservation is applied vectorially. Eliminating the recoil electron momentum yields the Compton energy relation
+
+\begin{equation}
+E_\theta =
+\frac{E_0}
+{1 + \frac{E_0}{m_e c^2}(1-\cos\theta)},
+\label{compton_energy}
+\end{equation}
+
+where $E_0$ is the incident photon energy and $m_e c^2 = 511$~keV.
+
+For $E_0 \ll m_e c^2$, the shift approaches the classical Thomson scattering limit. For $E_0 \sim m_e c^2$, relativistic effects dominate and the energy shift becomes significant.
+
+\subsection*{Klein--Nishina Differential Cross Section}
+
+The angular distribution of scattered photons is described by the Klein--Nishina formula~\cite{klein1929}
+
+\begin{equation}
+\frac{d\sigma}{d\Omega}
+=
+\frac{r_0^2}{2}
+\left(\frac{E_\theta}{E_0}\right)^2
+\left(
+\frac{E_\theta}{E_0}
++
+\frac{E_0}{E_\theta}
+-
+\sin^2\theta
+\right),
+\label{KN}
+\end{equation}
+
+where
+
+\begin{equation}
+r_0 = \frac{e^2}{4\pi\varepsilon_0 m_e c^2}
+= 2.818 \times 10^{-15}~\text{m}
+\end{equation}
+
+is the classical electron radius.
+
+Equation~(\ref{KN}) incorporates both relativistic kinematics and quantum electrodynamics. Integration over all solid angles yields the total Compton cross section.
+
+
+\section*{Results and Data Analysis}
+
+\subsection*{Energy Verification of the Compton Relation}
+
+The scattered photon energies were measured at 
+$\theta = 30^\circ, 45^\circ, 60^\circ, 90^\circ,$ and $120^\circ$
+for Aluminium and Brass targets using a $^{137}$Cs source ($E_0 = 662$~keV).
+
+The theoretical prediction is given by Eq.~(\ref{compton_energy}). 
+Table~I lists the expected scattered energies.
+
+\begin{table}[H]
+\caption{Theoretical Compton scattered energies for $E_0 = 662$ keV.}
+\begin{ruledtabular}
+\begin{tabular}{cc}
+$\theta$ (deg) & $E_\theta$ (keV) \\
+\hline
+30 & 564.1 \\
+45 & 479.7 \\
+60 & 401.6 \\
+90 & 288.4 \\
+120 & 224.7 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsubsection*{Aluminium}
+
+For Aluminium, excellent agreement is observed for $\theta \ge 60^\circ$, with deviations below 2\%. 
+However, significant discrepancies occur at 30° and 45°, where measured energies approach the 662~keV photopeak. This indicates contamination from unscattered primary radiation.
+
+The correlation coefficient obtained from nonlinear fitting was
+\[
+r = 0.9911,
+\]
+confirming overall consistency with the Compton relation despite low-angle systematic error.
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Aluminium_Evaluation.png}
+\caption{Measured scattered photon energies for Aluminium compared with the theoretical Compton prediction. Deviation at small angles is due to photopeak contamination.}
+\end{figure}
+
+Representative calibrated spectra with Gaussian peak fitting are shown in Fig.~2. Clear Compton peaks are observed at 60°, 90°, and 120°.
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Aluminium_Spectrum.png}
+\caption{Aluminium spectra with Gaussian fits used to extract peak centroid energies and areas.}
+\end{figure}
+
+\textbf{Sanity Check:}  
+The measured energies decrease monotonically with increasing angle, consistent with Eq.~(\ref{compton_energy}). The 90° and 120° values agree within experimental uncertainty, confirming correct calibration.
+
+\subsubsection*{Brass}
+
+For Brass, all measured energies agree with theoretical values within 3\%. The nonlinear fit yielded
+
+\[
+r = 0.9998,
+\]
+
+indicating near-ideal verification of the Compton formula.
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Brass_Evaluation.png}
+\caption{Energy–angle relation for Brass target showing excellent agreement with Compton theory.}
+\end{figure}
+
+Gaussian peak fits for Brass are shown in Fig.~4.
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Brass_Spectrum.png}
+\caption{Brass spectra with Gaussian fits. Well-defined Compton peaks are observed at all angles.}
+\end{figure}
+
+\textbf{Sanity Check:}  
+Energy shift is independent of target material. Brass and Aluminium show identical values at 60°, 90°, and 120°, confirming that Compton scattering depends only on electron mass.
+
+\vspace{0.4cm}
+
+\subsection*{Angular Intensity Distribution and Klein--Nishina Verification}
+
+The integrated Gaussian peak area was taken proportional to scattered intensity. 
+Data analysis and fitting were performed using the Python script \texttt{Analysis.py} (available at the project repository), where Klein--Nishina predictions were computed and a single scaling parameter $C$ was fitted via nonlinear least squares.
+
+The fitting model was
+\begin{equation}
+I_{\text{exp}}(\theta) = C \, KN(\theta),
+\end{equation}
+where $KN(\theta)$ is given by Eq.~(\ref{KN}).
+
+\subsubsection*{Brass Fit}
+
+Fit results:
+\[
+C = 1043.86, \quad
+R^2 = 0.122, \quad
+\chi^2 = 308.19.
+\]
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Brass_Fit.png}
+\caption{Brass intensity compared with Klein--Nishina prediction. The qualitative trend is reproduced but quantitative agreement is limited.}
+\end{figure}
+
+Although intensity decreases monotonically with angle, consistent with Klein--Nishina theory, the low $R^2$ and large $\chi^2$ indicate significant systematic deviations.
+
+\textbf{Sanity Check:}  
+Peak areas follow the expected decreasing order:
+\[
+I_{30^\circ} > I_{45^\circ} > I_{60^\circ} > I_{90^\circ} > I_{120^\circ}.
+\]
+This confirms physically consistent angular behavior.
+
+\subsubsection*{Aluminium Fit}
+
+For Aluminium (excluding 30° contamination):
+
+\[
+C = 1021.72, \quad
+R^2 = 0.216, \quad
+\chi^2 = 96.30.
+\]
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{Aluminium_Fit.png}
+\caption{Aluminium intensity compared with Klein--Nishina prediction. Systematic deviations are visible.}
+\end{figure}
+
+Again, the angular trend matches theory qualitatively, but quantitative agreement remains poor.
+
+\textbf{Sanity Check:}
+The fitted scale factors for Brass and Aluminium are similar ($\sim 10^3$), indicating consistent detector scaling and normalization.
+
+\vspace{0.4cm}
+
+\subsection*{Interpretation of Intensity Discrepancy}
+
+The poor quantitative agreement with Klein--Nishina theory arises from:
+
+\begin{itemize}
+\item Finite detector solid angle (theory assumes $d\Omega \to 0$),
+\item Multiple scattering within the target,
+\item Energy-dependent absorption,
+\item Detector efficiency variation,
+\item Background subtraction uncertainty.
+\end{itemize}
+
+The Klein--Nishina formula describes scattering from a free electron under idealized conditions. Real laboratory geometry introduces systematic deviations, explaining the large $\chi^2$ values despite correct angular trends.
+
+\vspace{0.4cm}
+
+\textbf{Overall Sanity Verification}
+
+\begin{itemize}
+\item Energy shift follows theoretical monotonic decrease.
+\item Energy agreement is within 2–3\% for valid angles.
+\item Intensity decreases with increasing angle.
+\item Scale factors are consistent across materials.
+\item No non-physical behavior observed in data.
+\end{itemize}
+discrepancies.
+
+\section*{Discussion and Sources of Error}
+
+The experimental verification of the Compton energy relation demonstrates strong agreement with relativistic theory, particularly for the Brass target. However, systematic deviations appear in both energy and intensity measurements, especially at small scattering angles. These deviations arise from several experimental limitations.
+
+\subsection*{Primary Beam Contamination}
+
+At $\theta = 30^\circ$ and $45^\circ$ for Aluminium, the measured energy approaches the 662~keV photopeak. This indicates incomplete shielding and leakage of unscattered primary radiation into the detector. Since the Klein--Nishina formula assumes detection of only singly scattered photons, contamination from the direct beam leads to overestimation of scattered energy and intensity.
+
+\subsection*{Finite Detector Solid Angle}
+
+The Klein--Nishina differential cross section describes scattering into an infinitesimal solid angle $d\Omega$. In contrast, the NaI(Tl) detector subtends a finite solid angle. As a result, the measured intensity represents an angular average rather than a differential value, leading to systematic deviation from the ideal theoretical curve.
+
+\subsection*{Multiple Scattering Effects}
+
+The theoretical model assumes single scattering from a free electron. In practice, photons may undergo multiple scattering events inside the target material before reaching the detector. Multiple scattering broadens the energy spectrum and modifies the observed angular distribution, particularly at larger target thicknesses.
+
+\subsection*{Energy-Dependent Absorption}
+
+Scattered photons must traverse material before detection. Since attenuation depends on photon energy, higher-angle (lower-energy) photons experience greater absorption. This effect reduces measured intensity relative to Klein--Nishina predictions and contributes to the observed large $\chi^2$ values.
+
+\subsection*{Detector Resolution and Background Subtraction}
+
+The finite energy resolution of the NaI(Tl) detector introduces uncertainty in Gaussian peak fitting and centroid determination. Additionally, imperfect background subtraction affects peak area estimation, particularly at large angles where counting statistics are lower. 
+
+\subsection*{Statistical Counting Uncertainty}
+
+Photon detection follows Poisson statistics, with uncertainty
+\[
+\sigma = \sqrt{N}.
+\]
+At large scattering angles, reduced count rates increase relative uncertainty, contributing to deviations in intensity fitting.
+
+\vspace{0.3cm}
+
+\section*{Conclusion}
+
+The experiment provides a precise verification of the Compton energy relation for 662~keV $\gamma$-rays. For the Brass target, measured energies agree with theoretical predictions within 3\% across all scattering angles, yielding a correlation coefficient $r = 0.9998$. Aluminium measurements show excellent agreement for $\theta \ge 60^\circ$, while low-angle deviations are attributed to primary beam contamination.
+
+The angular intensity distribution exhibits the expected monotonic decrease with scattering angle, consistent with Klein--Nishina theory. However, quantitative fitting yields low $R^2$ values and large $\chi^2$, indicating systematic departures from the ideal differential cross section. These discrepancies arise from finite detector geometry, multiple scattering, absorption effects, and instrumental limitations rather than failure of the underlying theory.
+
+Overall, the results confirm relativistic photon--electron scattering and validate conservation of energy and momentum in Compton processes. While precise quantitative verification of the Klein--Nishina distribution is limited by experimental constraints, the qualitative agreement demonstrates the fundamental correctness of the theoretical framework.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{compton1923}
+A. H. Compton, Phys. Rev. \textbf{21}, 483 (1923).
+
+\bibitem{klein1929}
+O. Klein and Y. Nishina, Z. Phys. \textbf{52}, 853 (1929).
+
+\bibitem{griffiths}
+D. J. Griffiths, \textit{Introduction to Elementary Particles} (Wiley, 2008).
+
+\end{thebibliography}
+
+\end{document}
