@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-def linear_fit_analysis(x, y, y_err=None, plot=True,title="Linear_fit"):
+def linear_fit_analysis(x=None, y=None, y_err=None, plot=True,title="Linear_fit",xlab="V",ylab="I"):
     x = np.array(x)
     y = np.array(y)
     n = len(x)
@@ -43,8 +43,8 @@ def linear_fit_analysis(x, y, y_err=None, plot=True,title="Linear_fit"):
 
         plt.plot(x_line, y_line, label=label)
 
-        plt.xlabel("Current (mA)")
-        plt.ylabel("Voltage (mV)")
+        plt.xlabel(xlab)
+        plt.ylabel(ylab)
         plt.title(title)
         plt.legend()
         plt.grid()
