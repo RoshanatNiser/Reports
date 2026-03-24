@@ -9,7 +9,7 @@ R_Ge= V/I
 
 
 
-print(linear_fit_analysis(I,V,title="For Germanium (W= 0.5mm)"))
+print(linear_fit_analysis(I,V,title="I-V graph of Germanium (W= 0.5mm)",xlab="Current (mA)",ylab="Voltage (mV)"))
 
 # For Si
 I=np.array([50,90,130,170,210,250,290,331,370])
@@ -19,7 +19,7 @@ R_si=V/I
 
 
 
-print(linear_fit_analysis(I,V,title="For Silicon (W= 0.5mm)"))
+print(linear_fit_analysis(I,V,title="I-V graph of Silicon (W= 0.5mm)",xlab="Current (mA)",ylab="Voltage (mV)"))
 
 # For Al
 W=3e-3
@@ -30,4 +30,4 @@ R_Al=V/I
 
 
 
-print(linear_fit_analysis(I,V,title="For Aluminium Foil (W=0.3mm)"))
+print(linear_fit_analysis(I,V,title="I-V graph of Aluminium Foil (W=0.3mm)",xlab="Current (mA)",ylab="Voltage (mV)"))
