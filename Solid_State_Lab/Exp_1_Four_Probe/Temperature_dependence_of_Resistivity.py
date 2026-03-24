@@ -31,11 +31,11 @@ print("ln(rho) : ", ln_rho,"\n")
 
 R_1= linear_fit_analysis(x=T_in, y=ln_rho,title="Temperature dependence of Resistivity for Germanium",xlab="T^-1",ylab="ln(rho)")
 
+k_B= 1.380649 * 10**-23
+E_g_1=(2*k_B) * R_1['slope']
+err_1= (2*k_B) *R_1['slope_err']
 
-E_g_1=R_1['slope']
-err_1=R_1['slope_err']
-
-print("Band Gap for Germanium: ",E_g_1, "+", err_1,"J\n")
+print("Band Gap for Germanium: ",E_g_1, "\u00B1", err_1,"J\n")
 
 # For Aluminium
 
