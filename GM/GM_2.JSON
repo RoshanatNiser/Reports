@@ -1,0 +1,77 @@
+{
+  "exp5_beta_absorption": {
+    "density_al": 2.71,
+
+    "sources": {
+      "Tl204": {
+        "background_counts": 190.8,
+        "count_time": 180,
+        "data": [
+          {"thickness_mm": 0.00, "counts": 6242},
+          {"thickness_mm": 0.06, "counts": 4689},
+          {"thickness_mm": 0.12, "counts": 3669},
+          {"thickness_mm": 0.18, "counts": 2683},
+          {"thickness_mm": 0.24, "counts": 2035},
+          {"thickness_mm": 0.30, "counts": 1655},
+          {"thickness_mm": 0.36, "counts": 1261},
+          {"thickness_mm": 0.42, "counts": 990},
+          {"thickness_mm": 0.48, "counts": 763},
+          {"thickness_mm": 0.54, "counts": 592}
+        ]
+      },
+
+      "Sr90": {
+        "background_counts": 105.5,
+        "count_time": 100,
+        "data": [
+          {"thickness_mm": 0.00, "counts": 8162},
+          {"thickness_mm": 0.06, "counts": 7127},
+          {"thickness_mm": 0.12, "counts": 5380},
+          {"thickness_mm": 0.18, "counts": 5380},
+          {"thickness_mm": 0.24, "counts": 5186},
+          {"thickness_mm": 0.30, "counts": 4536},
+          {"thickness_mm": 0.36, "counts": 4216},
+          {"thickness_mm": 0.42, "counts": 3874},
+          {"thickness_mm": 0.48, "counts": 3857},
+          {"thickness_mm": 0.54, "counts": 3583}
+        ]
+      }
+    }
+  },
+
+  "exp6_backscattering": {
+    "background_counts": 0,
+    "count_time": 200,
+    "data": [
+      {"thickness_mm": 0.00, "counts1": 227, "counts2": 227},
+      {"thickness_mm": 0.05, "counts1": 224, "counts2": 224},
+      {"thickness_mm": 0.10, "counts1": 249.5, "counts2": 249.5},
+      {"thickness_mm": 0.15, "counts1": 247, "counts2": 247},
+      {"thickness_mm": 0.20, "counts1": 249, "counts2": 249},
+      {"thickness_mm": 0.25, "counts1": 263.5, "counts2": 263.5},
+      {"thickness_mm": 0.30, "counts1": 238.5, "counts2": 238.5},
+      {"thickness_mm": 0.35, "counts1": 237, "counts2": 237},
+      {"thickness_mm": 0.40, "counts1": 239.5, "counts2": 239.5},
+      {"thickness_mm": 0.45, "counts1": 242, "counts2": 242},
+      {"thickness_mm": 0.50, "counts1": 236.5, "counts2": 236.5},
+      {"thickness_mm": 0.55, "counts1": 252, "counts2": 252}
+    ]
+  },
+
+  "exp7_bremsstrahlung": {
+    "background_counts": 332,
+    "count_time": 300,
+
+    "configurations": {
+      "Al_Perspex": {
+        "counts": [4039, 483, 484]
+      },
+      "Cu_Perspex": {
+        "counts": [4039, 447, 416]
+      },
+      "Cu_Al": {
+        "counts": [4039, 396, 444]
+      }
+    }
+  }
+}
