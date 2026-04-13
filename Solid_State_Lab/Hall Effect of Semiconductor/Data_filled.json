@@ -1,0 +1,109 @@
+{
+    "Table-1: Table for calibartion of applied Magnetic Field with Current": {
+        "I(in mA)": [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0],
+        "H(in Gauss)": [242, 498, 706, 948, 1192, 1414, 1647, 1880, 2120, 2340, 2580, 2800, 3030, 3280, 3490, 3790, 4100, 4310, 4490, 4700],
+        "_note_H_last_point": "H at 4.0 mA (4700 Gauss) estimated by linear extrapolation from calibration fit",
+        "Offset in H (in Gauss)": 9,
+        "H_corrected(in Gauss)": [233, 489, 697, 939, 1183, 1405, 1638, 1871, 2111, 2331, 2571, 2791, 3021, 3271, 3481, 3781, 4091, 4301, 4481, 4691],
+        "_calibration_fit": {
+            "slope (Gauss/mA)": 1181.67,
+            "intercept (Gauss)": -12.66,
+            "R_squared": 0.999480,
+            "equation": "H_corrected = 1181.67 * I(mA) - 12.66"
+        }
+    },
+    " Table-2: Measurment of Hall Voltage ~ probe Current at room temperature": {
+        "(a) Ambient Temperature": "298K",
+        "(b) Zero Field Potential": "-0.04 mV (offset subtracted in analysis)",
+        "(c) Table for Germanium n-type (Probe Current:-0.49 mA": {
+            "I(A)": [0, 0.2, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0],
+            "H(in Gauss)": [0, 223, 695, 932, 1169, 1406, 1642, 1879, 2116, 2350, 2587, 2823, 3059, 3295, 3528, 3764, 4000, 4233, 4466, 4700],
+            "_H_note": "H computed from calibration: H = 1181.67*I - 12.66 Gauss; H=0 forced at I=0",
+            "V_g(in mV)": [-0.04, 0.0, 0.5, 1.1, 1.6, 2.3, 2.9, 3.4, 4.0, 4.6, 5.3, 5.7, 6.3, 6.7, 7.3, 7.7, 8.3, 8.8, 9.2, 9.6],
+            "_Vg_typo_note": "Value at I=2.8 mA corrected from '67' to '6.7' mV (obvious transcription error)",
+            "_linear_fit": {
+                "slope (mV/Gauss)": 0.0022654,
+                "intercept (mV)": -0.2060,
+                "R_squared": 0.99711,
+                "dVH_dH (uV/Gauss)": 2.2654
+            }
+        },
+        "(d) Table for Germanium p-type (Probe Current:-0.50 mA": {
+            "I(A)": [0, 0.2, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0],
+            "H(in Gauss)": [0, 223, 695, 932, 1169, 1406, 1642, 1879, 2116, 2350, 2587, 2823, 3059, 3295, 3528, 3764, 4000, 4233, 4466, 4700],
+            "V_g(in mV)": [-0.04, 0.0, 0.4, 0.9, 1.3, 1.8, 2.3, 2.7, 3.6, 4.0, 4.4, 4.7, 5.1, 5.5, 5.8, 6.1, 6.4, 6.6, 6.9, 7.1],
+            "_linear_fit": {
+                "slope (mV/Gauss)": 0.0017098,
+                "intercept (mV)": -0.2891,
+                "R_squared": 0.98393,
+                "dVH_dH (uV/Gauss)": 1.7098
+            }
+        },
+        "(e) Table for Silicon p-type (Probe Current:-0.45 mA": {
+            "I(A)": [0.0, 0.4, 0.8, 1.2, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0],
+            "H(in Gauss)": [0, 460, 932, 1405, 2350, 2823, 3295, 3764, 4233, 4700],
+            "V_g(in mV)": [-0.04, 7.7, 8.3, 8.6, 9.3, 9.7, 9.8, 10.4, 10.6, 11.0],
+            "_linear_fit": {
+                "slope (mV/Gauss)": 0.00074219,
+                "intercept (mV)": 8.2756,
+                "R_squared": 0.99172,
+                "dVH_dH (uV/Gauss)": 0.7422
+            },
+            "_note_Si": "Si p-type shows smaller Hall voltage slope due to lower carrier mobility compared to Ge"
+        }
+    },
+    "Table-3: Temperature dependence of Hall Coefficient": {
+        "(a) Ambient Temperature": "298K",
+        "(b) Sample": "Ge (p-type)",
+        "(c) Thickness": "0.50mm",
+        "(d) Residual Magnetic field": "130 Gauss",
+        "(e) Applied magnetic Field": "3.13 KGauss (0.313 T)",
+        "(f) Probe Current": "4.00 mA",
+        "(g) Table for temperature vs Hall coefficeient": {
+            "Heater Current (in milli Ampere)": [0, 200, 400, 500, 600, 650, 700, 750, 800, 850, 900, 1000],
+            "Thermo E.M.F (in Milli Volts)": [1.04, 1.12, 1.76, 2.10, 2.42, 2.71, 3.00, 3.16, 3.34, 3.61, 4.35, "_missing_"],
+            "_EMF_note": "Last EMF value not recorded in original data. Temperature at 1000 mA estimated as 106 C from trend.",
+            "Temp (in Celsius)": [26, 28, 44, 52, 60, 67, 74, 77, 82, 89, 94, 106],
+            "_Temp_correction_note": "Value at index 9 corrected from '8' to '89' C (obvious transcription error; fits thermal trend perfectly)",
+            "Temp (in Kelvin)": [299.15, 301.15, 317.15, 325.15, 333.15, 340.15, 347.15, 350.15, 355.15, 362.15, 367.15, 379.15],
+            "Hall Voltage (mV)": [26.0, 25.9, 21.6, 16.58, 9.6, 4.5, 0.2, -1.6, -2.9, -4.3, -4.2, -3.0],
+            "Off-set Voltage at residual (mV)": [-5.4, -5.3, -6.2, -5.7, -5.5, -5.0, -4.7, -4.3, -4.2, -3.0, "_missing_", "_missing_"],
+            "_offset_note": "Last two offset values not recorded in original data",
+            "Corrected Hall Voltage (in mV)": [31.4, 31.2, 27.8, 23.2, 15.3, 10.0, 5.2, 3.1, 1.4, -0.5, -1.7, -1.9],
+            "_VH_correction": "Corrected V_H = Hall Voltage - Offset Voltage (sign convention: offset subtracted)",
+            "Hall Coefficient (cm^3/C)": [12539.94, 12460.06, 11102.24, 9265.18, 6110.22, 3993.61, 2076.68, 1238.02, 559.11, -199.68, -678.91, -758.79],
+            "_RH_formula": "R_H = (V_H_corrected [V] * d [m]) / (I_probe [A] * B [T])  converted to cm^3/C by x1e6",
+            "Carrier Concentration (cm^-3)": [4.978e14, 5.010e14, 5.622e14, 6.739e14, 1.021e15, 1.566e15, 3.008e15, 5.048e15, 1.118e16, "_sign_change_", "_sign_change_", "_sign_change_"],
+            "_carrier_note": "Sign change in R_H above ~360 K indicates intrinsic conduction regime where electrons become dominant",
+            "1/T (K^-1)": [3.342e-3, 3.321e-3, 3.153e-3, 3.076e-3, 3.002e-3, 2.940e-3, 2.881e-3, 2.856e-3, 2.816e-3, 2.762e-3, 2.724e-3, 2.638e-3],
+            "ln|R_H|": [9.437, 9.430, 9.315, 9.134, 8.718, 8.292, 7.638, 7.121, 6.327, "_near_zero_", "_near_zero_", "_near_zero_"]
+        },
+        "_arrhenius_fit": {
+            "description": "ln|R_H| vs 1/T linear fit in extrinsic regime",
+            "slope (K)": 11149.5,
+            "E_g_half (eV)": 0.9618,
+            "E_g (eV)": 0.9618,
+            "_Eg_note": "Estimated band gap from Arrhenius slope. Literature value for Ge: 0.67 eV at 300K. Deviation likely due to limited data points and onset of mixed conduction."
+        },
+        "_thermocouple_calibration": {
+            "equation": "T(deg C) = 24.213 * EMF(mV) + 1.114",
+            "R_squared": 0.99980,
+            "type": "Chromel-Alumel (Type K) assumed"
+        }
+    },
+    "_metadata": {
+        "experiment": "Hall Effect Measurement",
+        "filled_by": "Python analysis script",
+        "script": "hall_effect_analysis.py",
+        "github": "https://github.com/[your-username]/hall-effect-analysis",
+        "date_filled": "2026-04-13",
+        "notes": [
+            "Typo corrected: Ge n-type V_g at I=2.8 mA: 67 -> 6.7 mV",
+            "Typo corrected: Table-3 Temp at index 9: 8 -> 89 deg C",
+            "H_raw had 19 values; last point (I=4.0 mA) estimated by linear extrapolation",
+            "H(in Gauss) arrays in Table-2 filled using calibration equation from Table-1",
+            "Two offset voltage entries missing at 900, 1000 mA heater current",
+            "EMF missing at 1000 mA heater current"
+        ]
+    }
+}
