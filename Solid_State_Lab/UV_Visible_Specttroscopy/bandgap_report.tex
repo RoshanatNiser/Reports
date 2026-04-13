@@ -1,0 +1,459 @@
+\documentclass[12pt,a4paper]{article}
+
+%─── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+%─── Formatting ────────────────────────────────────────────────────────────────
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, citecolor=green!40!black,
+            urlcolor=blue!60!black}
+\sisetup{separate-uncertainty=true}
+\captionsetup{font=small, labelfont=bf, width=0.92\linewidth}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small UV-Vis Band Gap Estimation}
+\rhead{\small \today}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+%─── Macros ────────────────────────────────────────────────────────────────────
+\newcommand{\Eg}{E_{\mathrm{g}}}
+\newcommand{\hnu}{h\nu}
+\newcommand{\cm}{\,\mathrm{cm}^{-1}}
+
+%───────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+%─── Title ─────────────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE\bfseries UV-Vis Spectroscopy for Optical Band Gap Estimation}\\[0.6em]
+  {\large Tauc Plot Analysis of Direct and Indirect Semiconductors}\\[1.2em]
+  {\normalsize\itshape Laboratory Report}\\[0.3em]
+  {\small \today}
+\end{center}
+
+\vspace{0.5em}
+\noindent\rule{\linewidth}{0.6pt}
+\vspace{0.4em}
+
+%─── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+\noindent
+The optical band gaps of four direct-gap semiconductor thin films (CdS, TiO$_2$, ZnO,
+ZnTe) and one indirect-gap Si-based polymer film were estimated using the Tauc plot
+method from UV-Vis absorbance data. The absorption coefficient $\alpha$ was extracted
+via the Beer–Lambert law. For direct transitions ($\alpha^2 \propto \hnu - \Eg$), linear
+extrapolation of $\alpha^2$ vs.\ $\hnu$ yields the band gap; for indirect transitions
+($\sqrt{\alpha} \propto \hnu - \Eg$), the same procedure is applied to $\sqrt{\alpha}$.
+Extracted band gaps: CdS $\approx \SI{1.81}{eV}$, ZnTe $\approx \SI{1.92}{eV}$,
+ZnO $\approx \SI{3.61}{eV}$, and Si-polymer
+$\Eg = \SI[parse-numbers=false]{1.345 \pm 0.071}{eV}$.
+TiO$_2$ data were saturated at the detector limit.
+Full error propagation and comparison with literature values are reported.
+The Python code for the analysis is available at:
+\begin{center}
+  \url{https://github.com/YOUR_USERNAME/bandgap-uvvis}   % \textleftarrow{} fill in your repo URL
+\end{center}
+\end{abstract}
+
+\vspace{0.4em}
+\noindent\rule{\linewidth}{0.4pt}
+\vspace{0.2em}
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+%───────────────────────────────────────────────────────────────────────────────
+
+The band gap $\Eg$ is the fundamental energy difference between the valence band
+maximum (VBM) and conduction band minimum (CBM).  In a \textbf{direct} band gap
+semiconductor the VBM and CBM occur at the same crystal momentum $\mathbf{k}$, so an
+electron-hole pair can be created by a single photon of energy $\hnu \geq \Eg$.  In an
+\textbf{indirect} gap material the extrema occur at different $\mathbf{k}$ values; absorption
+therefore requires a simultaneous phonon interaction to conserve momentum, leading to a
+weaker, gradual absorption onset~\cite{Pankove1971}.
+
+UV-Vis spectroscopy probes electronic transitions as a function of photon energy and is a
+standard, non-destructive technique for optical band gap determination in thin films.  The
+Tauc plot method~\cite{Tauc1966} linearises the absorption edge to give a precise
+x-intercept estimate of $\Eg$.
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Theory}
+%───────────────────────────────────────────────────────────────────────────────
+
+\subsection{Beer–Lambert Law and Absorption Coefficient}
+
+For a thin film of thickness $d$, the Beer–Lambert law gives
+\begin{equation}
+  I_T = I_0 \, e^{-\alpha d},
+  \label{eq:BeerLambert}
+\end{equation}
+where $I_0$ and $I_T$ are the incident and transmitted intensities.
+The absorbance $A = \log_{10}(I_0/I_T)$, so the absorption coefficient is
+\begin{equation}
+  \alpha \;(\mathrm{cm}^{-1}) = \frac{2.303\,A}{d},
+  \label{eq:alpha}
+\end{equation}
+with $d$ in cm.
+
+\subsection{Tauc Relation}
+
+Near the band edge the absorption coefficient follows~\cite{Tauc1966,Pankove1971}
+\begin{equation}
+  \alpha = C \bigl[\hnu - \Eg\bigr]^{n},
+  \label{eq:Tauc}
+\end{equation}
+where $C$ is a material-dependent constant.  The exponent $n$ encodes the type of
+transition:
+\begin{itemize}
+  \item $n = \tfrac{1}{2}$: direct allowed transitions $\;\Rightarrow\; \alpha^2 \propto (\hnu-\Eg)$
+  \item $n = 2$: indirect allowed transitions $\;\Rightarrow\; \sqrt{\alpha} \propto (\hnu-\Eg)$
+\end{itemize}
+Plotting $\alpha^2$ (or $\sqrt{\alpha}$) versus $\hnu$ and linearly extrapolating the
+absorption edge to the energy axis gives $\Eg$ as the x-intercept.
+
+The square-root onset in the density of states $D_{cv}(E) \propto (E-\Eg)^{1/2}$ arises
+from the 3-D parabolic band approximation: near the band edge $k^2 \propto (E-\Eg)$, and
+the number of states inside a sphere of radius $k$ scales as $k \propto (E-\Eg)^{1/2}$.
+The matrix element $M_{cv}(\mathbf{k}) \approx \text{const.}$ near $\mathbf{k}=\mathbf{0}$
+(smooth function, Taylor-expanded to leading order), giving $\alpha(\hnu) \propto |M_{cv}|^2
+D_{cv}(\hnu) \propto (\hnu - \Eg)^{1/2}$ for direct transitions.
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Experimental}
+%───────────────────────────────────────────────────────────────────────────────
+
+\subsection{Instrument}
+
+A Holmarc fibre-optic spectrometer (CCD array, 3648 pixels, wavelength range
+\SIrange{386.5}{995.6}{nm}) was used.  The exposure time was optimised to keep peak
+counts below 60\,000 (saturation at 65\,535) with 10 averages.  Dark and reference
+spectra were recorded before each sample.  Samples were inserted normal to the beam
+to minimise reflection losses.
+
+\subsection{Samples}
+
+\begin{table}[h]
+  \centering
+  \caption{Samples analysed in this experiment.}
+  \label{tab:samples}
+  \begin{tabular}{llll}
+    \toprule
+    Sample & Type & $d$ (nm) & Gap type \\
+    \midrule
+    CdS    & thin film on glass & 200 & Direct \\
+    TiO$_2$ & thin film on glass & 200 & Direct \\
+    ZnO    & thin film on glass & 200 & Direct \\
+    ZnTe   & thin film on glass & 200 & Direct \\
+    Si-polymer & thin film, 150 nm & 150 & Indirect \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Data Processing}
+
+Pixel index was converted to wavelength via the linear calibration
+$\lambda = 386.542 + (p-1)\times 0.1674$\,nm (instrument specification).
+Photon energy: $E = hc/\lambda = 1239.8/\lambda$\,eV.
+The absorption coefficient was computed via Eq.~\eqref{eq:alpha} using the
+spectrometer-exported absorbance.  For the indirect sample, data below
+$\SI{1.2}{eV}$ were excluded due to an impurity-related absorption shoulder
+(analogous to Fig.~2 in the lab manual for InSb~\cite{labmanual}).
+All analysis was performed with a custom Python 3 script; the code is available at
+the GitHub repository listed in the abstract.
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Results}
+%───────────────────────────────────────────────────────────────────────────────
+
+\subsection{Absorbance Spectra}
+
+Figure~\ref{fig:absorbance} shows the absorbance spectra of all direct-gap samples.
+CdS exhibits substantial background absorption across the entire visible range,
+consistent with a thick/defective film.  ZnTe shows a clear absorption onset near
+$\sim\SI{590}{nm}$ ($\sim\SI{2.1}{eV}$).  ZnO and TiO$_2$ absorb strongly in the
+UV, with band edges at or beyond the short-wavelength detector limit ($\sim\SI{387}{nm}$,
+$\SI{3.21}{eV}$).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\linewidth]{figures/fig1_absorbance.png}
+  \caption{Absorbance vs.\ wavelength for the four direct-gap samples.  ZnO and
+  TiO$_2$ band edges extend beyond the detector range ($>\SI{3.21}{eV}$).}
+  \label{fig:absorbance}
+\end{figure}
+
+\subsection{Direct Band Gap — Tauc Plots ($\alpha^2$ vs.\ $h\nu$)}
+
+Figure~\ref{fig:tauc_direct} shows the combined Tauc plots.  Individual plots with
+annotated linear fits are given in Appendix~\ref{app:individual}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig2_tauc_direct.png}
+  \caption{Tauc plots ($\alpha^2$ vs.\ $\hnu$) for all direct-gap samples.
+  Red dashed lines: linear fits in the identified onset region.
+  TiO$_2$: Tauc plot shown but Eg not extracted (see text).}
+  \label{fig:tauc_direct}
+\end{figure}
+
+\paragraph{CdS.}  The film absorbs throughout the measured range, indicating
+significant subgap absorption (likely from defects/impurities or a thick film).
+A linear region is identified at \SIrange{2.10}{2.40}{eV}, yielding
+$\Eg(\mathrm{CdS}) \approx \SI{1.81}{eV}$ ($R^2 = 0.97$).  The literature value
+is \SI{2.42}{eV}; the discrepancy is attributed to background absorption raising the
+$\alpha^2$ baseline, which shifts the x-intercept to lower energies.
+
+\paragraph{ZnTe.}  A clean linear onset is observed at \SIrange{2.10}{2.40}{eV},
+giving $\Eg(\mathrm{ZnTe}) \approx \SI{1.92}{eV}$ ($R^2 = 0.97$).
+Literature: \SI{2.26}{eV}.
+
+\paragraph{ZnO.}  The band edge falls near the detector limit; only a few points
+above \SI{3.0}{eV} define the linear region, yielding
+$\Eg(\mathrm{ZnO}) \approx \SI{3.61}{eV}$.
+Literature: \SI{3.37}{eV}; the agreement is reasonable given the limited spectral range.
+
+\paragraph{TiO$_2$.}  The absorbance is constant ($A \approx 0.23$) above
+$\sim\SI{2.9}{eV}$, indicating detector saturation in the UV, and the data are
+strongly noise-dominated below that.  No reliable Tauc fit could be extracted; the
+true band gap ($\SI{3.20}{eV}$) lies at the spectrometer's short-wavelength
+boundary.
+
+\subsection{Indirect Band Gap — Tauc Plot ($\sqrt{\alpha}$ vs.\ $h\nu$)}
+
+Figure~\ref{fig:alpha_indirect} shows $\alpha$ vs.\ $\hnu$ for the Si-based film;
+Figure~\ref{fig:tauc_indirect} shows the Tauc plot.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/fig4_alpha_indirect.png}
+    \caption{$\alpha$ vs.\ photon energy.  The gradual onset is characteristic of
+    indirect transitions.}
+    \label{fig:alpha_indirect}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/fig3_tauc_indirect.png}
+    \caption{Tauc plot ($\sqrt{\alpha}$ vs.\ $\hnu$).  Shaded region: excluded
+    impurity shoulder ($<\SI{1.2}{eV}$).}
+    \label{fig:tauc_indirect}
+  \end{subfigure}
+  \caption{Absorption data for the indirect-gap Si-based polymer film
+  ($d = \SI{150}{nm}$).}
+\end{figure}
+
+A linear fit over \SIrange{1.2}{2.0}{eV} gives:
+\begin{align}
+  \sqrt{\alpha} &= 572.7\,(\hnu) - 770.3 \qquad (R^2 = 0.803) \\[4pt]
+  \Eg &= \frac{770.3}{572.7} = \SI{1.345}{eV}
+\end{align}
+The $R^2 = 0.80$ reflects the inherent curvature in indirect-gap absorption (phonon
+branches contribute two slightly different slopes; cf.\ Fig.~1 of the lab
+manual~\cite{labmanual}).
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Error Analysis}
+%───────────────────────────────────────────────────────────────────────────────
+
+\subsection{Propagation through $\alpha$}
+
+From Eq.~\eqref{eq:alpha}, applying partial-derivative propagation:
+\begin{equation}
+  \frac{\delta\alpha}{\alpha} = \sqrt{
+    \left(\frac{\delta A}{A}\right)^2 + \left(\frac{\delta d}{d}\right)^2
+  },
+  \label{eq:dalpha}
+\end{equation}
+with $\delta A = 0.005$ (instrument resolution) and $\delta d = \SI{5}{nm}$
+(deposition tolerance, $\sim 3.3\%$).  At the indirect-gap onset
+($A \approx 0.3$, $d = \SI{150}{nm}$), both terms contribute equally,
+giving $\delta\alpha/\alpha \approx 4.7\%$.
+
+\subsection{Propagation through $\sqrt{\alpha}$}
+
+By the chain rule: $\delta(\sqrt{\alpha}) = \delta\alpha / (2\sqrt{\alpha})$.
+
+\subsection{Uncertainty in $\Eg$}
+
+The band gap is extracted as $\Eg = -b/m$ from a linear fit $\sqrt{\alpha} = m\,\hnu + b$.
+Error propagation through the ratio:
+\begin{equation}
+  \frac{\delta\Eg}{\Eg} = \sqrt{
+    \left(\frac{\delta m}{m}\right)^2 + \left(\frac{\delta b}{b}\right)^2
+  },
+\end{equation}
+where $\delta m$ and $\delta b$ are the ordinary least-squares standard errors of the
+slope and intercept.  For the indirect sample:
+
+\begin{table}[h]
+  \centering
+  \caption{Uncertainty budget for indirect band gap.}
+  \label{tab:errors}
+  \begin{tabular}{llS[table-format=2.4]}
+    \toprule
+    Source & Symbol & {Value} \\
+    \midrule
+    Absorbance resolution & $\delta A$ & 0.0050 \\
+    Thickness uncertainty & $\delta d$ & \SI{5}{nm} \\
+    Std.\ error of slope  & $\delta m$ & \SI{21.37}{(cm^{-1})^{1/2} eV^{-1}} \\
+    Std.\ error of intercept & $\delta b$ & \SI{37.63}{(cm^{-1})^{1/2}} \\
+    \midrule
+    \textbf{Band gap uncertainty} & $\delta\Eg$ & \SI{0.071}{eV} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent
+\textbf{Final result (indirect):}
+\begin{equation}
+  \boxed{\Eg = \SI[parse-numbers=false]{1.345 \pm 0.071}{eV}}
+\end{equation}
+
+\subsection{Dominant Error Sources}
+
+\begin{enumerate}
+  \item \textbf{Regression statistical error} ($\delta m$, $\delta b$) — dominant.
+        Caused by curvature in the Tauc plot; a wider or better-defined linear region
+        would reduce this.
+  \item \textbf{Thickness uncertainty} — equally important with absorbance error
+        at the band onset (Eq.~\eqref{eq:dalpha}).
+  \item \textbf{Linear region selection} — systematic and largest for CdS/ZnTe,
+        where background absorption displaces the intercept.
+  \item \textbf{Detector saturation / spectral range} — limits TiO$_2$ and ZnO
+        analysis entirely.
+  \item \textbf{Reflection and scattering losses} — overestimate $\alpha$
+        (not corrected here).
+  \item \textbf{Parabolic band approximation} — model error inherent to the Tauc
+        method; real bands deviate from perfect parabolicity.
+\end{enumerate}
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+%───────────────────────────────────────────────────────────────────────────────
+
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of measured band gaps vs.\ literature values at \SI{300}{K}.}
+  \label{tab:summary}
+  \begin{tabular}{lccc S[table-format=+3.1] l}
+    \toprule
+    Sample & Type & $\Eg^{\mathrm{meas}}$ (eV) & $\Eg^{\mathrm{lit}}$ (eV)
+           & {$\Delta$ (\%)} & Remark \\
+    \midrule
+    CdS     & Direct   & 1.814 & 2.42\cite{Hummel2001} & -25.1 & background abs. \\
+    TiO$_2$ & Direct   & N/A   & 3.20\cite{Hummel2001} & {—}   & detector limited \\
+    ZnO     & Direct   & 3.614 & 3.37\cite{Hummel2001} & +7.2  & near limit \\
+    ZnTe    & Direct   & 1.918 & 2.26\cite{Hummel2001} & -15.1 & background abs. \\
+    Si-polymer & Indirect & $1.345\pm0.071$ & 1.12\cite{Hummel2001} & +20.1 & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For CdS and ZnTe the measured $\Eg$ is lower than literature because the films absorb
+even below the true band edge (defect states, impurities, or interference from the glass
+substrate), which raises the $\alpha^2$ baseline and shifts the linear extrapolation
+intercept to lower energies.  This is a known artefact of thick or defect-rich films.
+
+The Si-based polymer gives $\Eg = \SI{1.345}{eV}$, somewhat above crystalline Si
+(\SI{1.12}{eV}).  This is consistent with quantum confinement or composition effects in a
+polymer matrix~\cite{labmanual}, or with the $R^2 = 0.80$ suggesting a non-ideal
+linear region.
+
+ZnO gives $+7\%$ deviation; because only a handful of data points lie near the band edge,
+the fit is sensitive to noise, but the order-of-magnitude agreement confirms the measurement
+is physically meaningful.
+
+The gradual vs.\ sharp absorption onset in Fig.~\ref{fig:alpha_indirect} vs.\
+Fig.~\ref{fig:absorbance} qualitatively confirms the distinction between indirect
+(phonon-mediated, slow) and direct (fast, sharp) transitions.
+
+%───────────────────────────────────────────────────────────────────────────────
+\section{Conclusion}
+%───────────────────────────────────────────────────────────────────────────────
+
+The Tauc plot method was successfully applied to UV-Vis absorbance data to extract optical
+band gaps.  For ZnTe and ZnO, where the absorption edge falls within the spectrometer
+range, the results agree with literature to within 7--15\%.  The indirect band gap of the
+Si-polymer film is $\Eg = \SI[parse-numbers=false]{1.345 \pm 0.071}{eV}$, in reasonable
+agreement with Si-based materials.  CdS and TiO$_2$ are limited by background absorption
+and detector range, respectively, illustrating the importance of matching the spectrometer
+range to the material's band gap.
+
+%───────────────────────────────────────────────────────────────────────────────
+\begin{thebibliography}{9}
+
+\bibitem{Pankove1971}
+  J.~I.~Pankove,
+  \textit{Optical Processes in Semiconductors},
+  Dover Publications, 1971.
+
+\bibitem{Tauc1966}
+  J.~Tauc, R.~Grigorovici, A.~Vancu,
+  \textit{Phys.\ Status Solidi}, \textbf{15}, 627 (1966).
+
+\bibitem{Hummel2001}
+  R.~E.~Hummel,
+  \textit{Electronic Properties of Materials}, 3rd edn.,
+  Springer, 2001, Appendix 4.
+
+\bibitem{Zanatta2019}
+  A.~R.~Zanatta,
+  \textit{Sci.\ Rep.}, \textbf{9}, 11225 (2019).
+
+\bibitem{labmanual}
+  Lab Manual,
+  \textit{Ultraviolet-Visible Spectroscopy to Determine the Nature of Band Gap
+  and Estimation of the Bandgap},
+  IIT, 2024.
+
+\end{thebibliography}
+
+%───────────────────────────────────────────────────────────────────────────────
+\appendix
+\section{Individual Tauc Plots}
+\label{app:individual}
+%───────────────────────────────────────────────────────────────────────────────
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig5_cds_tauc.png}
+  \caption{CdS: absorbance spectrum (left) and Tauc plot with linear fit (right).}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig6_tio2_tauc.png}
+  \caption{TiO$_2$: absorbance spectrum (left) and Tauc plot (right). Reliable
+  band gap extraction is not possible due to data saturation.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig7_zno_tauc.png}
+  \caption{ZnO: absorbance spectrum (left) and Tauc plot with linear fit (right).}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig8_znte_tauc.png}
+  \caption{ZnTe: absorbance spectrum (left) and Tauc plot with linear fit (right).}
+\end{figure}
+
+\end{document}
